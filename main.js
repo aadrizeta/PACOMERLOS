@@ -5,6 +5,14 @@ function prefersReducedMotion() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+// Fallback: algunos previews/webviews pueden no soportar IntersectionObserver.
+// Si ocultamos elementos con .js-ready pero no podemos observar, los revelamos de inmediato.
+if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.sr, .sr-wipe, .sr-tilt, .sr-tilt-neg, .sr-left, .sr-right').forEach(el => {
+        el.classList.add('revealed');
+    });
+}
+
 function getHeaderOffset() {
     const header = document.getElementById('header');
     return (header ? header.offsetHeight : 0) + 12;
@@ -50,29 +58,31 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 0);
 });
 
-// Scroll Reveal Observer
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
+if ('IntersectionObserver' in window) {
+    // Scroll Reveal Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
 
-document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+    document.querySelectorAll('.sr').forEach(el => observer.observe(el));
 
-// Scroll Reveal — CSS Animation Classes
-const srRevealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            srRevealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.05 });
+    // Scroll Reveal — CSS Animation Classes
+    const srRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                srRevealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05 });
 
-document.querySelectorAll('.sr-wipe, .sr-tilt, .sr-tilt-neg, .sr-left, .sr-right').forEach(el => srRevealObserver.observe(el));
+    document.querySelectorAll('.sr-wipe, .sr-tilt, .sr-tilt-neg, .sr-left, .sr-right').forEach(el => srRevealObserver.observe(el));
+}
 
 // Eclair Drift Animations
 const eclair1 = document.getElementById('eclair1');

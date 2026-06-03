@@ -1,452 +1,1635 @@
 <!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Exploración — Paquito Raro · Paco Merlos</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploración — Paquito Raro · Paco Merlos</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
 
-<style>
-  /* Reset de contexto: el design_canvas carga el site CSS entero pero
+    <style>
+      /* Reset de contexto: el design_canvas carga el site CSS entero pero
      queremos que los artboards se comporten como slices independientes.
      Cada artboard tiene overflow:hidden y width/height fijas. */
-  body { margin: 0; font-family: 'Now', system-ui, sans-serif; }
+      body {
+        margin: 0;
+        font-family: "Now", system-ui, sans-serif;
+      }
 
-  .ab { width:100%; height:100%; overflow:hidden; position:relative; }
-  .ab-scroll { width:100%; height:100%; overflow:auto; position:relative; }
+      .ab {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+      .ab-scroll {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+      }
 
-  /* ───────────── V1 · Tarjeta con sello oculto ───────────── */
-  .v1 { background:#0f0f0f; color:#FFFFF1; padding:2.25rem 2rem 2rem; display:flex; flex-direction:column; gap:1.25rem; height:100%; box-sizing:border-box; position:relative; overflow:hidden;}
-  .v1::before { content:""; position:absolute; inset:0; background:
-    radial-gradient(ellipse at 20% 0%, rgba(140,82,255,.35), transparent 55%),
-    radial-gradient(ellipse at 80% 100%, rgba(255,101,58,.22), transparent 60%);
-    pointer-events:none;
-  }
-  .v1 > * { position:relative; z-index:1; }
-  .v1-eyebrow { font-size:.68rem; letter-spacing:.3em; text-transform:uppercase; color:#FFD200; font-weight:800;}
-  .v1-h { font-family:'Chunko',sans-serif; font-size:3.25rem; line-height:.9; letter-spacing:.01em; text-transform:uppercase; margin:0;}
-  .v1-h em { font-style:normal; color:#FF653A; display:block; }
-  .v1-card { margin-top:auto; background:rgba(255,255,241,.05); border:1px dashed rgba(255,210,0,.35); border-radius:12px; padding:1.1rem 1.25rem; display:flex; gap:1rem; align-items:center;}
-  .v1-sello { flex-shrink:0; width:3.5rem; height:3.5rem; border-radius:50%; background:#FFD200; color:#0f0f0f; display:flex; align-items:center; justify-content:center; font-family:'Chunko',sans-serif; font-size:1.75rem; transform:rotate(-8deg); box-shadow:0 4px 0 rgba(0,0,0,.3);}
-  .v1-card strong { font-family:'Chunko',sans-serif; font-size:.95rem; letter-spacing:.14em; color:#FFD200; display:block; margin-bottom:.2rem;}
-  .v1-card p { margin:0; font-size:.82rem; color:rgba(255,255,241,.65); line-height:1.5;}
-  .v1-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.4rem; margin-top:.5rem;}
-  .v1-slot { aspect-ratio:1; border-radius:8px; border:1px solid rgba(255,255,241,.15); display:flex; align-items:center; justify-content:center; font-size:.55rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,241,.35); background:rgba(255,255,241,.03);}
-  .v1-slot.x { background:rgba(255,210,0,.08); border-color:rgba(255,210,0,.4); color:#FFD200; font-size:1.25rem; font-family:'Chunko',sans-serif; position:relative;}
-  .v1-slot.x::after { content:""; position:absolute; inset:-2px; border-radius:inherit; border:1px solid rgba(255,210,0,.25); animation:v1pulse 2s infinite;}
-  @keyframes v1pulse { 50%{opacity:.3; transform:scale(1.08);} }
+      /* ───────────── V1 · Tarjeta con sello oculto ───────────── */
+      .v1 {
+        background: #0f0f0f;
+        color: #fffff1;
+        padding: 2.25rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        height: 100%;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+      }
+      .v1::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 0%,
+            rgba(140, 82, 255, 0.35),
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(255, 101, 58, 0.22),
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .v1 > * {
+        position: relative;
+        z-index: 1;
+      }
+      .v1-eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #ffd200;
+        font-weight: 800;
+      }
+      .v1-h {
+        font-family: "Chunko", sans-serif;
+        font-size: 3.25rem;
+        line-height: 0.9;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .v1-h em {
+        font-style: normal;
+        color: #ff653a;
+        display: block;
+      }
+      .v1-card {
+        margin-top: auto;
+        background: rgba(255, 255, 241, 0.05);
+        border: 1px dashed rgba(255, 210, 0, 0.35);
+        border-radius: 12px;
+        padding: 1.1rem 1.25rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .v1-sello {
+        flex-shrink: 0;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background: #ffd200;
+        color: #0f0f0f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Chunko", sans-serif;
+        font-size: 1.75rem;
+        transform: rotate(-8deg);
+        box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+      }
+      .v1-card strong {
+        font-family: "Chunko", sans-serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.14em;
+        color: #ffd200;
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      .v1-card p {
+        margin: 0;
+        font-size: 0.82rem;
+        color: rgba(255, 255, 241, 0.65);
+        line-height: 1.5;
+      }
+      .v1-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.4rem;
+        margin-top: 0.5rem;
+      }
+      .v1-slot {
+        aspect-ratio: 1;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 241, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 241, 0.35);
+        background: rgba(255, 255, 241, 0.03);
+      }
+      .v1-slot.x {
+        background: rgba(255, 210, 0, 0.08);
+        border-color: rgba(255, 210, 0, 0.4);
+        color: #ffd200;
+        font-size: 1.25rem;
+        font-family: "Chunko", sans-serif;
+        position: relative;
+      }
+      .v1-slot.x::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        border: 1px solid rgba(255, 210, 0, 0.25);
+        animation: v1pulse 2s infinite;
+      }
+      @keyframes v1pulse {
+        50% {
+          opacity: 0.3;
+          transform: scale(1.08);
+        }
+      }
 
-  /* ───────────── V2 · Recibo / ticket vertical ───────────── */
-  .v2 { background:#8C52FF; height:100%; display:flex; align-items:center; justify-content:center; padding:1.5rem; box-sizing:border-box; position:relative; overflow:hidden;}
-  .v2::before { content:"? ? ? ?"; position:absolute; font-family:'Chunko',sans-serif; font-size:14rem; color:rgba(255,255,241,.05); top:-3rem; left:-2rem; line-height:.8; letter-spacing:-.02em; pointer-events:none; white-space:pre-wrap; width:120%;}
-  .v2-ticket { background:#FFFFF1; color:#0f0f0f; width:100%; max-width:22rem; padding:1.5rem 1.5rem 1rem; position:relative; box-shadow:0 12px 32px rgba(0,0,0,.3); font-family:'Now',sans-serif;}
-  .v2-ticket::before, .v2-ticket::after { content:""; position:absolute; left:0; right:0; height:.75rem; background:
-    radial-gradient(circle .375rem at .375rem .375rem, #8C52FF 98%, transparent 100%) 0 0/.75rem .75rem repeat-x;
-  }
-  .v2-ticket::before { top:-.75rem; }
-  .v2-ticket::after { bottom:-.75rem; transform:scaleY(-1);}
-  .v2-t-head { text-align:center; border-bottom:1px dashed rgba(15,15,15,.2); padding-bottom:.75rem; margin-bottom:.9rem;}
-  .v2-t-head small { font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(15,15,15,.5); font-weight:700;}
-  .v2-t-head strong { font-family:'Chunko',sans-serif; font-size:1.8rem; display:block; margin-top:.2rem; color:#8C52FF;}
-  .v2-t-row { display:flex; justify-content:space-between; font-family:'Now',monospace; font-size:.78rem; padding:.35rem 0; border-bottom:1px dotted rgba(15,15,15,.1);}
-  .v2-t-row b { font-weight:700;}
-  .v2-t-row span { color:rgba(15,15,15,.5);}
-  .v2-t-total { display:flex; justify-content:space-between; margin-top:.6rem; padding-top:.6rem; border-top:2px solid #0f0f0f; font-family:'Chunko',sans-serif; letter-spacing:.05em;}
-  .v2-t-total b { font-size:.85rem;}
-  .v2-t-total em { font-style:normal; font-size:1.1rem; color:#FF653A;}
-  .v2-t-bar { margin-top:.8rem; height:2.5rem; background:repeating-linear-gradient(90deg, #0f0f0f 0 2px, transparent 2px 4px, #0f0f0f 4px 5px, transparent 5px 9px);}
-  .v2-t-foot { text-align:center; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(15,15,15,.5); margin-top:.6rem; font-weight:700;}
+      /* ───────────── V2 · Recibo / ticket vertical ───────────── */
+      .v2 {
+        background: #8c52ff;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+      }
+      .v2::before {
+        content: "? ? ? ?";
+        position: absolute;
+        font-family: "Chunko", sans-serif;
+        font-size: 14rem;
+        color: rgba(255, 255, 241, 0.05);
+        top: -3rem;
+        left: -2rem;
+        line-height: 0.8;
+        letter-spacing: -0.02em;
+        pointer-events: none;
+        white-space: pre-wrap;
+        width: 120%;
+      }
+      .v2-ticket {
+        background: #fffff1;
+        color: #0f0f0f;
+        width: 100%;
+        max-width: 22rem;
+        padding: 1.5rem 1.5rem 1rem;
+        position: relative;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        font-family: "Now", sans-serif;
+      }
+      .v2-ticket::before,
+      .v2-ticket::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 0.75rem;
+        background: radial-gradient(
+            circle 0.375rem at 0.375rem 0.375rem,
+            #8c52ff 98%,
+            transparent 100%
+          )
+          0 0/0.75rem 0.75rem repeat-x;
+      }
+      .v2-ticket::before {
+        top: -0.75rem;
+      }
+      .v2-ticket::after {
+        bottom: -0.75rem;
+        transform: scaleY(-1);
+      }
+      .v2-t-head {
+        text-align: center;
+        border-bottom: 1px dashed rgba(15, 15, 15, 0.2);
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.9rem;
+      }
+      .v2-t-head small {
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(15, 15, 15, 0.5);
+        font-weight: 700;
+      }
+      .v2-t-head strong {
+        font-family: "Chunko", sans-serif;
+        font-size: 1.8rem;
+        display: block;
+        margin-top: 0.2rem;
+        color: #8c52ff;
+      }
+      .v2-t-row {
+        display: flex;
+        justify-content: space-between;
+        font-family: "Now", monospace;
+        font-size: 0.78rem;
+        padding: 0.35rem 0;
+        border-bottom: 1px dotted rgba(15, 15, 15, 0.1);
+      }
+      .v2-t-row b {
+        font-weight: 700;
+      }
+      .v2-t-row span {
+        color: rgba(15, 15, 15, 0.5);
+      }
+      .v2-t-total {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.6rem;
+        padding-top: 0.6rem;
+        border-top: 2px solid #0f0f0f;
+        font-family: "Chunko", sans-serif;
+        letter-spacing: 0.05em;
+      }
+      .v2-t-total b {
+        font-size: 0.85rem;
+      }
+      .v2-t-total em {
+        font-style: normal;
+        font-size: 1.1rem;
+        color: #ff653a;
+      }
+      .v2-t-bar {
+        margin-top: 0.8rem;
+        height: 2.5rem;
+        background: repeating-linear-gradient(
+          90deg,
+          #0f0f0f 0 2px,
+          transparent 2px 4px,
+          #0f0f0f 4px 5px,
+          transparent 5px 9px
+        );
+      }
+      .v2-t-foot {
+        text-align: center;
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(15, 15, 15, 0.5);
+        margin-top: 0.6rem;
+        font-weight: 700;
+      }
 
-  /* ───────────── V3 · Alerta radar / transmisión ───────────── */
-  .v3 { background:#0a0a0a; color:#FFFFF1; height:100%; padding:1.75rem; box-sizing:border-box; display:flex; flex-direction:column; gap:1rem; position:relative; overflow:hidden; font-family:'Now',monospace;}
-  .v3-scan { position:absolute; inset:0; background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 2px, transparent 2px 4px),
-    radial-gradient(ellipse at 50% 50%, rgba(140,82,255,.15), transparent 70%);
-    pointer-events:none;
-  }
-  .v3 > * { position:relative; z-index:1; }
-  .v3-top { display:flex; justify-content:space-between; align-items:center; font-size:.62rem; letter-spacing:.18em; color:#FFD200; text-transform:uppercase;}
-  .v3-top .dot { display:inline-block; width:.55rem; height:.55rem; border-radius:50%; background:#FF3030; margin-right:.35rem; animation:v3blink 1s infinite;}
-  @keyframes v3blink { 50%{opacity:.3;}}
-  .v3-h { font-family:'Chunko',sans-serif; font-size:2.8rem; line-height:.9; text-transform:uppercase; margin:.5rem 0 0;}
-  .v3-h em { font-style:normal; color:#FFD200; display:block; text-shadow:0 0 12px rgba(255,210,0,.5);}
-  .v3-log { background:rgba(255,255,241,.04); border-left:2px solid #FFD200; padding:.75rem 1rem; font-size:.72rem; line-height:1.7; color:rgba(255,255,241,.65);}
-  .v3-log .t { color:#8C52FF;}
-  .v3-log .k { color:#FF653A; font-weight:700;}
-  .v3-grid { display:flex; gap:.5rem; margin-top:auto;}
-  .v3-cell { flex:1; aspect-ratio:1; border:1px solid rgba(255,255,241,.1); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.25rem;}
-  .v3-cell.hit { background:rgba(255,210,0,.08); border-color:#FFD200; color:#FFD200; font-family:'Chunko',sans-serif; font-size:1.8rem;}
-  .v3-cell .lbl { font-size:.5rem; letter-spacing:.15em; color:rgba(255,255,241,.4); text-transform:uppercase;}
-  .v3-cell .val { font-size:.7rem; color:rgba(255,255,241,.6); font-weight:700;}
-  .v3-cta { font-family:'Chunko',sans-serif; font-size:.8rem; letter-spacing:.14em; color:#0f0f0f; background:#FFD200; padding:.75rem 1rem; text-align:center; text-transform:uppercase;}
+      /* ───────────── V3 · Alerta radar / transmisión ───────────── */
+      .v3 {
+        background: #0a0a0a;
+        color: #fffff1;
+        height: 100%;
+        padding: 1.75rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+        overflow: hidden;
+        font-family: "Now", monospace;
+      }
+      .v3-scan {
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.025) 0 2px,
+            transparent 2px 4px
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            rgba(140, 82, 255, 0.15),
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+      .v3 > * {
+        position: relative;
+        z-index: 1;
+      }
+      .v3-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.62rem;
+        letter-spacing: 0.18em;
+        color: #ffd200;
+        text-transform: uppercase;
+      }
+      .v3-top .dot {
+        display: inline-block;
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: #ff3030;
+        margin-right: 0.35rem;
+        animation: v3blink 1s infinite;
+      }
+      @keyframes v3blink {
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .v3-h {
+        font-family: "Chunko", sans-serif;
+        font-size: 2.8rem;
+        line-height: 0.9;
+        text-transform: uppercase;
+        margin: 0.5rem 0 0;
+      }
+      .v3-h em {
+        font-style: normal;
+        color: #ffd200;
+        display: block;
+        text-shadow: 0 0 12px rgba(255, 210, 0, 0.5);
+      }
+      .v3-log {
+        background: rgba(255, 255, 241, 0.04);
+        border-left: 2px solid #ffd200;
+        padding: 0.75rem 1rem;
+        font-size: 0.72rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 241, 0.65);
+      }
+      .v3-log .t {
+        color: #8c52ff;
+      }
+      .v3-log .k {
+        color: #ff653a;
+        font-weight: 700;
+      }
+      .v3-grid {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: auto;
+      }
+      .v3-cell {
+        flex: 1;
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 255, 241, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+      }
+      .v3-cell.hit {
+        background: rgba(255, 210, 0, 0.08);
+        border-color: #ffd200;
+        color: #ffd200;
+        font-family: "Chunko", sans-serif;
+        font-size: 1.8rem;
+      }
+      .v3-cell .lbl {
+        font-size: 0.5rem;
+        letter-spacing: 0.15em;
+        color: rgba(255, 255, 241, 0.4);
+        text-transform: uppercase;
+      }
+      .v3-cell .val {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 241, 0.6);
+        font-weight: 700;
+      }
+      .v3-cta {
+        font-family: "Chunko", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.14em;
+        color: #0f0f0f;
+        background: #ffd200;
+        padding: 0.75rem 1rem;
+        text-align: center;
+        text-transform: uppercase;
+      }
 
-  /* ───────────── V4 · Sobre lacrado / secreto ───────────── */
-  .v4 { background:#FFFFE3; height:100%; padding:2rem; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.2rem; position:relative; overflow:hidden;}
-  .v4-eyebrow { font-family:'Now',monospace; font-size:.65rem; letter-spacing:.28em; color:rgba(15,15,15,.5); text-transform:uppercase; font-weight:700;}
-  .v4-env { width:100%; max-width:20rem; aspect-ratio:5/3; position:relative; background:linear-gradient(135deg,#F5F0E0 0%,#E8DFC6 100%); border:1px solid rgba(15,15,15,.15); box-shadow:0 10px 28px rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center;}
-  .v4-env::before { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 45%, rgba(15,15,15,.04) 50%, transparent 55%);}
-  .v4-env::after { content:""; position:absolute; top:0; left:10%; right:10%; height:52%; background:linear-gradient(135deg,#EBE2CC 0%,#DED4BB 100%); clip-path:polygon(0 0,100% 0,50% 100%); border-bottom:1px dashed rgba(15,15,15,.2);}
-  .v4-sello { position:absolute; width:4.5rem; height:4.5rem; border-radius:50%; background:radial-gradient(circle at 30% 30%, #FF8A5C, #C9451E); color:#FFFFF1; display:flex; align-items:center; justify-content:center; font-family:'Chunko',sans-serif; font-size:1.5rem; z-index:2; box-shadow:0 4px 10px rgba(0,0,0,.25); transform:rotate(-6deg); top:50%; left:50%; margin:-2.25rem 0 0 -2.25rem;}
-  .v4-sello::before { content:""; position:absolute; inset:.25rem; border-radius:50%; border:1px dashed rgba(255,255,241,.5);}
-  .v4-h { font-family:'Chunko',sans-serif; font-size:2.2rem; line-height:.95; text-transform:uppercase; text-align:center; margin:0; color:#0f0f0f;}
-  .v4-h em { font-style:normal; color:#8C52FF; display:block;}
-  .v4-p { font-size:.9rem; line-height:1.6; color:rgba(15,15,15,.6); text-align:center; max-width:22rem; margin:0;}
-  .v4-p b { color:#0f0f0f; font-weight:800;}
-  .v4-cta { font-family:'Chunko',sans-serif; font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:#FFFFF1; background:#0f0f0f; padding:.75rem 1.25rem;}
+      /* ───────────── V4 · Sobre lacrado / secreto ───────────── */
+      .v4 {
+        background: #ffffe3;
+        height: 100%;
+        padding: 2rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .v4-eyebrow {
+        font-family: "Now", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.28em;
+        color: rgba(15, 15, 15, 0.5);
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .v4-env {
+        width: 100%;
+        max-width: 20rem;
+        aspect-ratio: 5/3;
+        position: relative;
+        background: linear-gradient(135deg, #f5f0e0 0%, #e8dfc6 100%);
+        border: 1px solid rgba(15, 15, 15, 0.15);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .v4-env::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 45%,
+          rgba(15, 15, 15, 0.04) 50%,
+          transparent 55%
+        );
+      }
+      .v4-env::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10%;
+        right: 10%;
+        height: 52%;
+        background: linear-gradient(135deg, #ebe2cc 0%, #ded4bb 100%);
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        border-bottom: 1px dashed rgba(15, 15, 15, 0.2);
+      }
+      .v4-sello {
+        position: absolute;
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #ff8a5c, #c9451e);
+        color: #fffff1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Chunko", sans-serif;
+        font-size: 1.5rem;
+        z-index: 2;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        transform: rotate(-6deg);
+        top: 50%;
+        left: 50%;
+        margin: -2.25rem 0 0 -2.25rem;
+      }
+      .v4-sello::before {
+        content: "";
+        position: absolute;
+        inset: 0.25rem;
+        border-radius: 50%;
+        border: 1px dashed rgba(255, 255, 241, 0.5);
+      }
+      .v4-h {
+        font-family: "Chunko", sans-serif;
+        font-size: 2.2rem;
+        line-height: 0.95;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 0;
+        color: #0f0f0f;
+      }
+      .v4-h em {
+        font-style: normal;
+        color: #8c52ff;
+        display: block;
+      }
+      .v4-p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: rgba(15, 15, 15, 0.6);
+        text-align: center;
+        max-width: 22rem;
+        margin: 0;
+      }
+      .v4-p b {
+        color: #0f0f0f;
+        font-weight: 800;
+      }
+      .v4-cta {
+        font-family: "Chunko", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #fffff1;
+        background: #0f0f0f;
+        padding: 0.75rem 1.25rem;
+      }
 
-  /* ──────────────────────────────────────────────────────── */
-  /* Galería · variantes                                       */
-  /* ──────────────────────────────────────────────────────── */
+      /* ──────────────────────────────────────────────────────── */
+      /* Galería · variantes                                       */
+      /* ──────────────────────────────────────────────────────── */
 
-  /* ─────── G1 · Collage con polaroid mix ─────── */
-  .g1 { background:#FFFFE3; height:100%; padding:2rem 1.5rem; box-sizing:border-box; position:relative; overflow:hidden;}
-  .g1-h { font-family:'Chunko',sans-serif; font-size:2rem; text-align:center; margin:0 0 .3rem; line-height:.95; text-transform:uppercase;}
-  .g1-h em { font-style:normal; color:#FF653A;}
-  .g1-sub { text-align:center; font-size:.78rem; color:rgba(15,15,15,.55); margin:0 0 1.25rem;}
-  .g1-stage { position:relative; height:calc(100% - 5rem);}
-  .g1-pol { position:absolute; background:#FFFFF1; padding:.5rem .5rem 1.5rem; box-shadow:0 6px 18px rgba(0,0,0,.15); font-family:'Comic Sans MS',cursive; font-size:.7rem; color:#0f0f0f; text-align:center;}
-  .g1-pol .img { width:100%; aspect-ratio:1; background:var(--c,#8C52FF) repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 10px,transparent 10px 20px); display:flex; align-items:center; justify-content:center; color:#FFFFF1; font-family:'Chunko',sans-serif; font-size:.9rem;}
-  .g1-pol .cap { margin-top:.35rem;}
-  .g1-pol.p1 { width:38%; top:0; left:5%; transform:rotate(-5deg); --c:#FF653A;}
-  .g1-pol.p2 { width:42%; top:8%; right:3%; transform:rotate(4deg); --c:#8C52FF;}
-  .g1-pol.p3 { width:36%; top:46%; left:8%; transform:rotate(3deg); --c:#FFD200; color:#0f0f0f;}
-  .g1-pol.p4 { width:38%; top:52%; right:6%; transform:rotate(-4deg); --c:#FF653A;}
-  .g1-pol.p3 .img { color:#0f0f0f;}
-  .g1-star { position:absolute; font-family:'Chunko',sans-serif; font-size:.55rem; letter-spacing:.15em; color:#FFFFF1; background:#FF653A; padding:.15rem .4rem; border-radius:.25rem; top:.5rem; right:.5rem; transform:rotate(6deg);}
+      /* ─────── G1 · Collage con polaroid mix ─────── */
+      .g1 {
+        background: #ffffe3;
+        height: 100%;
+        padding: 2rem 1.5rem;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+      }
+      .g1-h {
+        font-family: "Chunko", sans-serif;
+        font-size: 2rem;
+        text-align: center;
+        margin: 0 0 0.3rem;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+      .g1-h em {
+        font-style: normal;
+        color: #ff653a;
+      }
+      .g1-sub {
+        text-align: center;
+        font-size: 0.78rem;
+        color: rgba(15, 15, 15, 0.55);
+        margin: 0 0 1.25rem;
+      }
+      .g1-stage {
+        position: relative;
+        height: calc(100% - 5rem);
+      }
+      .g1-pol {
+        position: absolute;
+        background: #fffff1;
+        padding: 0.5rem 0.5rem 1.5rem;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        font-family: "Comic Sans MS", cursive;
+        font-size: 0.7rem;
+        color: #0f0f0f;
+        text-align: center;
+      }
+      .g1-pol .img {
+        width: 100%;
+        aspect-ratio: 1;
+        background: var(--c, #8c52ff)
+          repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12) 0 10px,
+            transparent 10px 20px
+          );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fffff1;
+        font-family: "Chunko", sans-serif;
+        font-size: 0.9rem;
+      }
+      .g1-pol .cap {
+        margin-top: 0.35rem;
+      }
+      .g1-pol.p1 {
+        width: 38%;
+        top: 0;
+        left: 5%;
+        transform: rotate(-5deg);
+        --c: #ff653a;
+      }
+      .g1-pol.p2 {
+        width: 42%;
+        top: 8%;
+        right: 3%;
+        transform: rotate(4deg);
+        --c: #8c52ff;
+      }
+      .g1-pol.p3 {
+        width: 36%;
+        top: 46%;
+        left: 8%;
+        transform: rotate(3deg);
+        --c: #ffd200;
+        color: #0f0f0f;
+      }
+      .g1-pol.p4 {
+        width: 38%;
+        top: 52%;
+        right: 6%;
+        transform: rotate(-4deg);
+        --c: #ff653a;
+      }
+      .g1-pol.p3 .img {
+        color: #0f0f0f;
+      }
+      .g1-star {
+        position: absolute;
+        font-family: "Chunko", sans-serif;
+        font-size: 0.55rem;
+        letter-spacing: 0.15em;
+        color: #fffff1;
+        background: #ff653a;
+        padding: 0.15rem 0.4rem;
+        border-radius: 0.25rem;
+        top: 0.5rem;
+        right: 0.5rem;
+        transform: rotate(6deg);
+      }
 
-  /* ─────── G2 · Feed IG stylized ─────── */
-  .g2 { background:#FFFFE3; height:100%; padding:1.5rem 1.25rem; box-sizing:border-box; overflow:hidden;}
-  .g2-phone { width:100%; max-width:18rem; margin:0 auto; background:#0f0f0f; border-radius:1.5rem; padding:.4rem; height:calc(100% - 1rem); display:flex; flex-direction:column; box-shadow:0 12px 32px rgba(0,0,0,.2);}
-  .g2-screen { background:#FFFFF1; flex:1; border-radius:1.15rem; overflow:hidden; display:flex; flex-direction:column;}
-  .g2-bar { display:flex; justify-content:space-between; align-items:center; padding:.55rem .85rem; border-bottom:1px solid rgba(15,15,15,.08); font-family:'Chunko',sans-serif; font-size:.85rem; color:#0f0f0f;}
-  .g2-bar span { font-size:.65rem; color:rgba(15,15,15,.5); font-family:'Now',sans-serif;}
-  .g2-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px;}
-  .g2-tile { aspect-ratio:1; background:var(--c,#8C52FF); position:relative; display:flex; align-items:flex-end; padding:.3rem; font-size:.5rem; color:#FFFFF1; font-weight:700; letter-spacing:.1em;}
-  .g2-tile.win::before { content:"★"; position:absolute; top:.25rem; left:.25rem; background:#FFD200; color:#0f0f0f; width:.95rem; height:.95rem; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:.55rem;}
-  .g2-tile.img { background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.12) 0 6px,transparent 6px 12px);}
-  .g2-foot { padding:.7rem; text-align:center; background:#FF653A; color:#FFFFF1; font-family:'Chunko',sans-serif; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase;}
+      /* ─────── G2 · Feed IG stylized ─────── */
+      .g2 {
+        background: #ffffe3;
+        height: 100%;
+        padding: 1.5rem 1.25rem;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .g2-phone {
+        width: 100%;
+        max-width: 18rem;
+        margin: 0 auto;
+        background: #0f0f0f;
+        border-radius: 1.5rem;
+        padding: 0.4rem;
+        height: calc(100% - 1rem);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+      }
+      .g2-screen {
+        background: #fffff1;
+        flex: 1;
+        border-radius: 1.15rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .g2-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.55rem 0.85rem;
+        border-bottom: 1px solid rgba(15, 15, 15, 0.08);
+        font-family: "Chunko", sans-serif;
+        font-size: 0.85rem;
+        color: #0f0f0f;
+      }
+      .g2-bar span {
+        font-size: 0.65rem;
+        color: rgba(15, 15, 15, 0.5);
+        font-family: "Now", sans-serif;
+      }
+      .g2-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        padding: 2px;
+      }
+      .g2-tile {
+        aspect-ratio: 1;
+        background: var(--c, #8c52ff);
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        padding: 0.3rem;
+        font-size: 0.5rem;
+        color: #fffff1;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+      .g2-tile.win::before {
+        content: "★";
+        position: absolute;
+        top: 0.25rem;
+        left: 0.25rem;
+        background: #ffd200;
+        color: #0f0f0f;
+        width: 0.95rem;
+        height: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.55rem;
+      }
+      .g2-tile.img {
+        background-image: repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.12) 0 6px,
+          transparent 6px 12px
+        );
+      }
+      .g2-foot {
+        padding: 0.7rem;
+        text-align: center;
+        background: #ff653a;
+        color: #fffff1;
+        font-family: "Chunko", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
 
-  /* ─────── G3 · Revista editorial ─────── */
-  .g3 { background:#FFFFF1; height:100%; padding:2rem 1.75rem; box-sizing:border-box; overflow:hidden; display:flex; flex-direction:column; gap:.9rem;}
-  .g3-top { display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid #0f0f0f; padding-bottom:.5rem;}
-  .g3-top .num { font-family:'Chunko',sans-serif; font-size:2.5rem; line-height:1; color:#FF653A;}
-  .g3-top .meta { font-family:'Now',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; text-align:right; color:rgba(15,15,15,.6);}
-  .g3-h { font-family:'Chunko',sans-serif; font-size:1.65rem; line-height:.98; text-transform:uppercase; margin:0;}
-  .g3-h em { font-style:normal; color:#8C52FF;}
-  .g3-layout { display:grid; grid-template-columns:1.4fr 1fr; gap:.5rem; flex:1;}
-  .g3-hero { background:#8C52FF; position:relative; display:flex; align-items:flex-end; padding:.75rem; color:#FFFFF1; font-family:'Chunko',sans-serif; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;}
-  .g3-hero::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 8px,transparent 8px 16px);}
-  .g3-hero .badge { position:absolute; top:.5rem; right:.5rem; background:#FFD200; color:#0f0f0f; font-family:'Now',sans-serif; font-size:.55rem; font-weight:800; padding:.2rem .45rem; letter-spacing:.1em; z-index:1;}
-  .g3-hero span { position:relative; z-index:1;}
-  .g3-col { display:flex; flex-direction:column; gap:.4rem;}
-  .g3-tile { flex:1; background:#FF653A; display:flex; align-items:flex-end; padding:.5rem; font-size:.55rem; color:#FFFFF1; font-weight:700; letter-spacing:.1em;}
-  .g3-tile.alt { background:#0f0f0f;}
-  .g3-foot { display:flex; justify-content:space-between; border-top:1px solid #0f0f0f; padding-top:.5rem; font-family:'Now',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;}
-  .g3-foot b { color:#FF653A;}
+      /* ─────── G3 · Revista editorial ─────── */
+      .g3 {
+        background: #fffff1;
+        height: 100%;
+        padding: 2rem 1.75rem;
+        box-sizing: border-box;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+      .g3-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 1px solid #0f0f0f;
+        padding-bottom: 0.5rem;
+      }
+      .g3-top .num {
+        font-family: "Chunko", sans-serif;
+        font-size: 2.5rem;
+        line-height: 1;
+        color: #ff653a;
+      }
+      .g3-top .meta {
+        font-family: "Now", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-align: right;
+        color: rgba(15, 15, 15, 0.6);
+      }
+      .g3-h {
+        font-family: "Chunko", sans-serif;
+        font-size: 1.65rem;
+        line-height: 0.98;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .g3-h em {
+        font-style: normal;
+        color: #8c52ff;
+      }
+      .g3-layout {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 0.5rem;
+        flex: 1;
+      }
+      .g3-hero {
+        background: #8c52ff;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        padding: 0.75rem;
+        color: #fffff1;
+        font-family: "Chunko", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .g3-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.08) 0 8px,
+          transparent 8px 16px
+        );
+      }
+      .g3-hero .badge {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: #ffd200;
+        color: #0f0f0f;
+        font-family: "Now", sans-serif;
+        font-size: 0.55rem;
+        font-weight: 800;
+        padding: 0.2rem 0.45rem;
+        letter-spacing: 0.1em;
+        z-index: 1;
+      }
+      .g3-hero span {
+        position: relative;
+        z-index: 1;
+      }
+      .g3-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .g3-tile {
+        flex: 1;
+        background: #ff653a;
+        display: flex;
+        align-items: flex-end;
+        padding: 0.5rem;
+        font-size: 0.55rem;
+        color: #fffff1;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+      .g3-tile.alt {
+        background: #0f0f0f;
+      }
+      .g3-foot {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #0f0f0f;
+        padding-top: 0.5rem;
+        font-family: "Now", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .g3-foot b {
+        color: #ff653a;
+      }
 
-  /* ─────── G4 · Muro de pegatinas / tablón ─────── */
-  .g4 { background:#F5EAD2;
-    background-image:
-      radial-gradient(circle at 10% 20%, rgba(0,0,0,.04) 1px, transparent 2px),
-      radial-gradient(circle at 70% 80%, rgba(0,0,0,.04) 1px, transparent 2px),
-      radial-gradient(circle at 40% 65%, rgba(0,0,0,.04) 1px, transparent 2px);
-    background-size:60px 60px, 90px 90px, 120px 120px;
-    height:100%; padding:2rem 1.5rem; box-sizing:border-box; position:relative; overflow:hidden;}
-  .g4-h { font-family:'Chunko',sans-serif; font-size:1.6rem; text-align:center; text-transform:uppercase; margin:0 0 1rem; line-height:.95;}
-  .g4-h em { font-style:normal; color:#FF653A;}
-  .g4-wall { position:relative; height:calc(100% - 5rem);}
-  .g4-sticker { position:absolute; padding:.4rem; background:var(--c,#8C52FF); color:#FFFFF1; font-family:'Chunko',sans-serif; font-size:.7rem; text-transform:uppercase; box-shadow:0 4px 12px rgba(0,0,0,.15); display:flex; flex-direction:column; align-items:center; gap:.2rem;}
-  .g4-sticker .pic { width:100%; aspect-ratio:1; background:rgba(0,0,0,.15); background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.1) 0 6px,transparent 6px 12px); display:flex; align-items:center; justify-content:center; font-size:.85rem;}
-  .g4-sticker .tape { position:absolute; top:-.5rem; left:50%; transform:translateX(-50%) rotate(-3deg); width:2.5rem; height:.85rem; background:rgba(255,210,0,.7); mix-blend-mode:multiply;}
-  .g4-sticker .cap { font-size:.55rem; letter-spacing:.1em;}
-  .g4-s1 { width:38%; top:0; left:3%; transform:rotate(-4deg); --c:#FF653A;}
-  .g4-s2 { width:36%; top:4%; right:5%; transform:rotate(3deg); --c:#8C52FF;}
-  .g4-s3 { width:35%; top:42%; left:8%; transform:rotate(2deg); --c:#0f0f0f;}
-  .g4-s4 { width:38%; top:48%; right:4%; transform:rotate(-3deg); --c:#FFD200; color:#0f0f0f;}
-  .g4-cta { position:absolute; bottom:0; left:0; right:0; text-align:center; background:#0f0f0f; color:#FFFFF1; padding:.65rem; font-family:'Chunko',sans-serif; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase;}
+      /* ─────── G4 · Muro de pegatinas / tablón ─────── */
+      .g4 {
+        background: #f5ead2;
+        background-image:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(0, 0, 0, 0.04) 1px,
+            transparent 2px
+          ),
+          radial-gradient(
+            circle at 70% 80%,
+            rgba(0, 0, 0, 0.04) 1px,
+            transparent 2px
+          ),
+          radial-gradient(
+            circle at 40% 65%,
+            rgba(0, 0, 0, 0.04) 1px,
+            transparent 2px
+          );
+        background-size:
+          60px 60px,
+          90px 90px,
+          120px 120px;
+        height: 100%;
+        padding: 2rem 1.5rem;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+      }
+      .g4-h {
+        font-family: "Chunko", sans-serif;
+        font-size: 1.6rem;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 0 0 1rem;
+        line-height: 0.95;
+      }
+      .g4-h em {
+        font-style: normal;
+        color: #ff653a;
+      }
+      .g4-wall {
+        position: relative;
+        height: calc(100% - 5rem);
+      }
+      .g4-sticker {
+        position: absolute;
+        padding: 0.4rem;
+        background: var(--c, #8c52ff);
+        color: #fffff1;
+        font-family: "Chunko", sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+      }
+      .g4-sticker .pic {
+        width: 100%;
+        aspect-ratio: 1;
+        background: rgba(0, 0, 0, 0.15);
+        background-image: repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.1) 0 6px,
+          transparent 6px 12px
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+      }
+      .g4-sticker .tape {
+        position: absolute;
+        top: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%) rotate(-3deg);
+        width: 2.5rem;
+        height: 0.85rem;
+        background: rgba(255, 210, 0, 0.7);
+        mix-blend-mode: multiply;
+      }
+      .g4-sticker .cap {
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+      }
+      .g4-s1 {
+        width: 38%;
+        top: 0;
+        left: 3%;
+        transform: rotate(-4deg);
+        --c: #ff653a;
+      }
+      .g4-s2 {
+        width: 36%;
+        top: 4%;
+        right: 5%;
+        transform: rotate(3deg);
+        --c: #8c52ff;
+      }
+      .g4-s3 {
+        width: 35%;
+        top: 42%;
+        left: 8%;
+        transform: rotate(2deg);
+        --c: #0f0f0f;
+      }
+      .g4-s4 {
+        width: 38%;
+        top: 48%;
+        right: 4%;
+        transform: rotate(-3deg);
+        --c: #ffd200;
+        color: #0f0f0f;
+      }
+      .g4-cta {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        background: #0f0f0f;
+        color: #fffff1;
+        padding: 0.65rem;
+        font-family: "Chunko", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
 
-  /* ───────────── Nombres ───────────── */
-  .names { background:#FFFFE3; height:100%; padding:1.5rem 1.5rem; box-sizing:border-box; overflow-y:auto; color:#0f0f0f;}
-  .names h3 { font-family:'Chunko',sans-serif; font-size:1.15rem; text-transform:uppercase; margin:0 0 .8rem; letter-spacing:.04em;}
-  .names h3:not(:first-child) { margin-top:1.4rem; padding-top:1rem; border-top:1px solid rgba(15,15,15,.1);}
-  .names h3 em { color:#8C52FF; font-style:normal;}
-  .names ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.55rem;}
-  .names li { display:flex; gap:.75rem; align-items:baseline; font-size:.78rem; line-height:1.4;}
-  .names li b { font-family:'Chunko',sans-serif; color:#0f0f0f; letter-spacing:.01em; white-space:nowrap; flex-shrink:0;}
-  .names li span { color:rgba(15,15,15,.6);}
-  .names .hero { background:#8C52FF; color:#FFFFF1; padding:1rem 1.1rem; margin:-.2rem 0 1.1rem; border-radius:.5rem;}
-  .names .hero small { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; opacity:.65; font-weight:700;}
-  .names .hero strong { font-family:'Chunko',sans-serif; font-size:1.6rem; letter-spacing:.02em; display:block; margin-top:.2rem;}
-  .names .hero p { margin:.4rem 0 0; font-size:.78rem; line-height:1.5; color:rgba(255,255,241,.75);}
+      /* ───────────── Nombres ───────────── */
+      .names {
+        background: #ffffe3;
+        height: 100%;
+        padding: 1.5rem 1.5rem;
+        box-sizing: border-box;
+        overflow-y: auto;
+        color: #0f0f0f;
+      }
+      .names h3 {
+        font-family: "Chunko", sans-serif;
+        font-size: 1.15rem;
+        text-transform: uppercase;
+        margin: 0 0 0.8rem;
+        letter-spacing: 0.04em;
+      }
+      .names h3:not(:first-child) {
+        margin-top: 1.4rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(15, 15, 15, 0.1);
+      }
+      .names h3 em {
+        color: #8c52ff;
+        font-style: normal;
+      }
+      .names ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      .names li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: baseline;
+        font-size: 0.78rem;
+        line-height: 1.4;
+      }
+      .names li b {
+        font-family: "Chunko", sans-serif;
+        color: #0f0f0f;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .names li span {
+        color: rgba(15, 15, 15, 0.6);
+      }
+      .names .hero {
+        background: #8c52ff;
+        color: #fffff1;
+        padding: 1rem 1.1rem;
+        margin: -0.2rem 0 1.1rem;
+        border-radius: 0.5rem;
+      }
+      .names .hero small {
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.65;
+        font-weight: 700;
+      }
+      .names .hero strong {
+        font-family: "Chunko", sans-serif;
+        font-size: 1.6rem;
+        letter-spacing: 0.02em;
+        display: block;
+        margin-top: 0.2rem;
+      }
+      .names .hero p {
+        margin: 0.4rem 0 0;
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 241, 0.75);
+      }
+    </style>
+  </head>
+  <body>
+    <script
+      src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+      integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+      integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
 
-</style>
-</head>
-<body>
+    <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+    <script type="text/babel" src="design-canvas.jsx"></script>
 
-<div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
 
-<script type="text/babel" src="design-canvas.jsx"></script>
+      // Componente nombres con preview del Name en cada variante
+      function Names() {
+        return (
+          <div className="names ab-scroll">
+            <div className="hero">
+              <small>Top pick</small>
+              <strong>Paquito Rareza</strong>
+              <p>
+                Directo, raro y exclusivo. Funciona como palabra en castellano,
+                se lee igual que "fantasma" pero añade el matiz de "cosa escasa
+                de coleccionista". Fácil de escribir en hashtag: #PaquitoRareza.
+              </p>
+            </div>
 
-<script type="text/babel">
-const { useState } = React;
+            <h3>
+              <em>Raros</em> / exclusivos
+            </h3>
+            <ul>
+              <li>
+                <b>Paquito Rareza</b>
+                <span>· la pieza rara del obrador</span>
+              </li>
+              <li>
+                <b>Paquito Reliquia</b>
+                <span>· casi de coleccionista</span>
+              </li>
+              <li>
+                <b>Paquito Único</b>
+                <span>· el que no se repite</span>
+              </li>
+              <li>
+                <b>Paquito Joyita</b>
+                <span>· cariñoso + valioso</span>
+              </li>
+              <li>
+                <b>Paquito Edición Limitada</b>
+                <span>· corto: Paquito LTD</span>
+              </li>
+            </ul>
 
-// Componente nombres con preview del Name en cada variante
-function Names() {
-  return (
-    <div className="names ab-scroll">
-      <div className="hero">
-        <small>Top pick</small>
-        <strong>Paquito Rareza</strong>
-        <p>Directo, raro y exclusivo. Funciona como palabra en castellano, se lee igual que "fantasma" pero añade el matiz de "cosa escasa de coleccionista". Fácil de escribir en hashtag: #PaquitoRareza.</p>
-      </div>
+            <h3>
+              <em>Efímeros</em> / aparece y desaparece
+            </h3>
+            <ul>
+              <li>
+                <b>Paquito Cometa</b>
+                <span>· pasa una vez al mes</span>
+              </li>
+              <li>
+                <b>Paquito Eclipse</b>
+                <span>· aparece y se va</span>
+              </li>
+              <li>
+                <b>Paquito Relámpago</b>
+                <span>· rápido, impredecible</span>
+              </li>
+              <li>
+                <b>Paquito Destello</b>
+                <span>· brillo corto</span>
+              </li>
+            </ul>
 
-      <h3><em>Raros</em> / exclusivos</h3>
-      <ul>
-        <li><b>Paquito Rareza</b><span>· la pieza rara del obrador</span></li>
-        <li><b>Paquito Reliquia</b><span>· casi de coleccionista</span></li>
-        <li><b>Paquito Único</b><span>· el que no se repite</span></li>
-        <li><b>Paquito Joyita</b><span>· cariñoso + valioso</span></li>
-        <li><b>Paquito Edición Limitada</b><span>· corto: Paquito LTD</span></li>
-      </ul>
+            <h3>
+              <em>Críptico</em> / misterio
+            </h3>
+            <ul>
+              <li>
+                <b>Paquito Enigma</b>
+                <span>· sin pistas</span>
+              </li>
+              <li>
+                <b>Paquito Clandestino</b>
+                <span>· fuera del menú</span>
+              </li>
+              <li>
+                <b>Paquito Secreto</b>
+                <span>· clásico, claro</span>
+              </li>
+              <li>
+                <b>Paquito Sin Nombre</b>
+                <span>· meta, autorreferencial</span>
+              </li>
+            </ul>
 
-      <h3><em>Efímeros</em> / aparece y desaparece</h3>
-      <ul>
-        <li><b>Paquito Cometa</b><span>· pasa una vez al mes</span></li>
-        <li><b>Paquito Eclipse</b><span>· aparece y se va</span></li>
-        <li><b>Paquito Relámpago</b><span>· rápido, impredecible</span></li>
-        <li><b>Paquito Destello</b><span>· brillo corto</span></li>
-      </ul>
-
-      <h3><em>Críptico</em> / misterio</h3>
-      <ul>
-        <li><b>Paquito Enigma</b><span>· sin pistas</span></li>
-        <li><b>Paquito Clandestino</b><span>· fuera del menú</span></li>
-        <li><b>Paquito Secreto</b><span>· clásico, claro</span></li>
-        <li><b>Paquito Sin Nombre</b><span>· meta, autorreferencial</span></li>
-      </ul>
-
-      <h3><em>Mítico</em> / casi imposible</h3>
-      <ul>
-        <li><b>Paquito Unicornio</b><span>· el que casi nadie ve</span></li>
-        <li><b>Paquito Leyenda</b><span>· se cuenta pero no se ve</span></li>
-        <li><b>Paquito Mito</b><span>· más corto</span></li>
-        <li><b>Paquito Invisible</b><span>· solo lo ven los afortunados</span></li>
-      </ul>
-    </div>
-  );
-}
-
-// V1 — tarjeta oscura con sello
-function V1({name="PAQUITO RAREZA"}) {
-  return (
-    <div className="ab v1">
-      <div className="v1-eyebrow">· El factor X · Edición limitada</div>
-      <h2 className="v1-h">HAY UNO<br/>SUELTO<br/><em>POR AHÍ.</em></h2>
-      <p style={{color:'rgba(255,255,241,.55)', fontSize:'.88rem', lineHeight:1.65, margin:0, maxWidth:'26rem'}}>
-        En algunas cajas metemos un invitado sorpresa. No aparece en la vitrina.
-        No se anuncia. Si te toca, tienes <strong style={{color:'#FFD200'}}>48h</strong>.
-      </p>
-      <div className="v1-grid">
-        <div className="v1-slot">Red V.</div>
-        <div className="v1-slot">Pistacho</div>
-        <div className="v1-slot">C&amp;K</div>
-        <div className="v1-slot x">?</div>
-      </div>
-      <div className="v1-card">
-        <div className="v1-sello">★</div>
-        <div>
-          <strong>{name}</strong>
-          <p>Encuéntralo + foto con <b style={{color:'#FFFFF1'}}>#{name.replace(/\s+/g,'')}</b> = caja gratis el mes que viene.</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// V2 — ticket
-function V2({name="PAQUITO RELIQUIA"}) {
-  return (
-    <div className="ab v2">
-      <div className="v2-ticket">
-        <div className="v2-t-head">
-          <small>Paco Merlos · Madrid</small>
-          <strong>{name}</strong>
-        </div>
-        <div className="v2-t-row"><b>Concepto</b><span>Invitado sorpresa</span></div>
-        <div className="v2-t-row"><b>Cantidad</b><span>× 1 al mes</span></div>
-        <div className="v2-t-row"><b>Disponibilidad</b><span>Aleatoria</span></div>
-        <div className="v2-t-row"><b>Vitrina</b><span>No</span></div>
-        <div className="v2-t-row"><b>Hashtag</b><span>#{name.replace(/\s+/g,'')}</span></div>
-        <div className="v2-t-total"><b>Premio</b><em>Caja gratis</em></div>
-        <div className="v2-t-bar"></div>
-        <div className="v2-t-foot">★ Si lo encuentras, no lo cuentes ★</div>
-      </div>
-    </div>
-  );
-}
-
-// V3 — radar / transmisión
-function V3({name="PAQUITO ECLIPSE"}) {
-  return (
-    <div className="ab v3">
-      <div className="v3-scan"></div>
-      <div className="v3-top">
-        <span><span className="dot"></span>LIVE · Obrador Madrid</span>
-        <span>CH.48 / 03:14</span>
-      </div>
-      <h2 className="v3-h">HEMOS<br/>SOLTADO<br/><em>A UNO.</em></h2>
-      <div className="v3-log">
-        <div><span className="t">02:11</span> · lote enviado</div>
-        <div><span className="t">02:47</span> · <span className="k">{name}</span> infiltrado en caja X</div>
-        <div><span className="t">03:00</span> · esperando avistamiento...</div>
-      </div>
-      <div className="v3-grid">
-        <div className="v3-cell"><span className="lbl">Sabores</span><span className="val">3 fijos</span></div>
-        <div className="v3-cell"><span className="lbl">Invitado</span><span className="val">1 raro</span></div>
-        <div className="v3-cell hit">?</div>
-      </div>
-      <div className="v3-cta">ABRIR PISTAS →</div>
-    </div>
-  );
-}
-
-// V4 — sobre lacrado
-function V4({name="PAQUITO ENIGMA"}) {
-  return (
-    <div className="ab v4">
-      <div className="v4-eyebrow">·· Correspondencia privada ··</div>
-      <div className="v4-env">
-        <div className="v4-sello">PM</div>
-      </div>
-      <h2 className="v4-h">NO LO ABRAS<br/><em>si no es para ti.</em></h2>
-      <p className="v4-p">
-        Un invitado fuera de carta, escondido en una caja al azar. Lo llamamos <b>{name}</b>. Si te toca, <b>48 horas</b> para fotografiarlo.
-      </p>
-      <div className="v4-cta">ROMPER EL SELLO →</div>
-    </div>
-  );
-}
-
-// G1 — collage polaroids
-function G1() {
-  return (
-    <div className="ab g1">
-      <h2 className="g1-h">LO DICEN<br/><em>ellos.</em></h2>
-      <p className="g1-sub">Fotos reales. Caja gratis cada mes.</p>
-      <div className="g1-stage">
-        <div className="g1-pol p1"><div className="img">FOTO 01</div><div className="cap">@cliente_feliz</div></div>
-        <div className="g1-pol p2"><div className="img">FOTO 02</div><div className="cap">@red.velvet</div><span className="g1-star">★ GANADOR</span></div>
-        <div className="g1-pol p3"><div className="img">FOTO 03</div><div className="cap">@pistacho_4life</div></div>
-        <div className="g1-pol p4"><div className="img">FOTO 04</div><div className="cap">@dulceadicto</div></div>
-      </div>
-    </div>
-  );
-}
-
-// G2 — mockup phone
-function G2() {
-  return (
-    <div className="ab g2">
-      <div className="g2-phone">
-        <div className="g2-screen">
-          <div className="g2-bar">@paco_merlos <span>· 12.4k</span></div>
-          <div className="g2-grid">
-            <div className="g2-tile img win" style={{'--c':'#FF653A'}}>01</div>
-            <div className="g2-tile img" style={{'--c':'#8C52FF'}}>02</div>
-            <div className="g2-tile img" style={{'--c':'#FFD200', color:'#0f0f0f'}}>03</div>
-            <div className="g2-tile img" style={{'--c':'#0f0f0f'}}>04</div>
-            <div className="g2-tile img win" style={{'--c':'#8C52FF'}}>05</div>
-            <div className="g2-tile img" style={{'--c':'#FF653A'}}>06</div>
-            <div className="g2-tile img" style={{'--c':'#FFD200', color:'#0f0f0f'}}>07</div>
-            <div className="g2-tile img" style={{'--c':'#8C52FF'}}>08</div>
-            <div className="g2-tile img win" style={{'--c':'#FF653A'}}>09</div>
+            <h3>
+              <em>Mítico</em> / casi imposible
+            </h3>
+            <ul>
+              <li>
+                <b>Paquito Unicornio</b>
+                <span>· el que casi nadie ve</span>
+              </li>
+              <li>
+                <b>Paquito Leyenda</b>
+                <span>· se cuenta pero no se ve</span>
+              </li>
+              <li>
+                <b>Paquito Mito</b>
+                <span>· más corto</span>
+              </li>
+              <li>
+                <b>Paquito Invisible</b>
+                <span>· solo lo ven los afortunados</span>
+              </li>
+            </ul>
           </div>
-          <div className="g2-foot">★ Sube tu foto → caja gratis</div>
-        </div>
-      </div>
-    </div>
-  );
-}
+        );
+      }
 
-// G3 — editorial
-function G3() {
-  return (
-    <div className="ab g3">
-      <div className="g3-top">
-        <div className="num">05</div>
-        <div className="meta">· Comunidad<br/>Vol. 01 / 2026</div>
-      </div>
-      <h2 className="g3-h">LO DICEN <em>ELLOS.</em></h2>
-      <div className="g3-layout">
-        <div className="g3-hero">
-          <div className="badge">★ GANADOR</div>
-          <span>@cliente_feliz<br/>Caja gratis</span>
-        </div>
-        <div className="g3-col">
-          <div className="g3-tile">@red.velvet</div>
-          <div className="g3-tile alt">@pistacho_4life</div>
-          <div className="g3-tile">@dulceadicto</div>
-        </div>
-      </div>
-      <div className="g3-foot">
-        <span>— Etiqueta @paco_merlos</span>
-        <span><b>→</b> Cada mes</span>
-      </div>
-    </div>
-  );
-}
+      // V1 — tarjeta oscura con sello
+      function V1({ name = "PAQUITO RAREZA" }) {
+        return (
+          <div className="ab v1">
+            <div className="v1-eyebrow">· El factor X · Edición limitada</div>
+            <h2 className="v1-h">
+              HAY UNO
+              <br />
+              SUELTO
+              <br />
+              <em>POR AHÍ.</em>
+            </h2>
+            <p
+              style={{
+                color: "rgba(255,255,241,.55)",
+                fontSize: ".88rem",
+                lineHeight: 1.65,
+                margin: 0,
+                maxWidth: "26rem",
+              }}
+            >
+              En algunas cajas metemos un invitado sorpresa. No aparece en la
+              vitrina. No se anuncia. Si te toca, tienes{" "}
+              <strong style={{ color: "#FFD200" }}>48h</strong>.
+            </p>
+            <div className="v1-grid">
+              <div className="v1-slot">Red V.</div>
+              <div className="v1-slot">Pistacho</div>
+              <div className="v1-slot">C&amp;K</div>
+              <div className="v1-slot x">?</div>
+            </div>
+            <div className="v1-card">
+              <div className="v1-sello">★</div>
+              <div>
+                <strong>{name}</strong>
+                <p>
+                  Encuéntralo + foto con{" "}
+                  <b style={{ color: "#FFFFF1" }}>
+                    #{name.replace(/\s+/g, "")}
+                  </b>{" "}
+                  = caja gratis el mes que viene.
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      }
 
-// G4 — muro de pegatinas
-function G4() {
-  return (
-    <div className="ab g4">
-      <h2 className="g4-h">MURO DE<br/><em>fans.</em></h2>
-      <div className="g4-wall">
-        <div className="g4-sticker g4-s1"><span className="tape"></span><div className="pic">★</div><div className="cap">@cliente_feliz</div></div>
-        <div className="g4-sticker g4-s2"><span className="tape"></span><div className="pic">02</div><div className="cap">@red.velvet</div></div>
-        <div className="g4-sticker g4-s3"><span className="tape"></span><div className="pic">03</div><div className="cap">@pistacho_4life</div></div>
-        <div className="g4-sticker g4-s4"><span className="tape"></span><div className="pic">★</div><div className="cap">@dulceadicto</div></div>
-      </div>
-      <div className="g4-cta">ETIQUETA @PACO_MERLOS</div>
-    </div>
-  );
-}
+      // V2 — ticket
+      function V2({ name = "PAQUITO RELIQUIA" }) {
+        return (
+          <div className="ab v2">
+            <div className="v2-ticket">
+              <div className="v2-t-head">
+                <small>Paco Merlos · Madrid</small>
+                <strong>{name}</strong>
+              </div>
+              <div className="v2-t-row">
+                <b>Concepto</b>
+                <span>Invitado sorpresa</span>
+              </div>
+              <div className="v2-t-row">
+                <b>Cantidad</b>
+                <span>× 1 al mes</span>
+              </div>
+              <div className="v2-t-row">
+                <b>Disponibilidad</b>
+                <span>Aleatoria</span>
+              </div>
+              <div className="v2-t-row">
+                <b>Vitrina</b>
+                <span>No</span>
+              </div>
+              <div className="v2-t-row">
+                <b>Hashtag</b>
+                <span>#{name.replace(/\s+/g, "")}</span>
+              </div>
+              <div className="v2-t-total">
+                <b>Premio</b>
+                <em>Caja gratis</em>
+              </div>
+              <div className="v2-t-bar"></div>
+              <div className="v2-t-foot">
+                ★ Si lo encuentras, no lo cuentes ★
+              </div>
+            </div>
+          </div>
+        );
+      }
 
-function App() {
-  return (
-    <DesignCanvas>
-      <DCSection id="nombres" title="Ideas de nombre" subtitle="Para reemplazar 'Paquito Fantasma' — el invitado sorpresa">
-        <DCArtboard id="names" label="Ranking · 16 candidatos" width={360} height={640}>
-          <Names />
-        </DCArtboard>
-      </DCSection>
+      // V3 — radar / transmisión
+      function V3({ name = "PAQUITO ECLIPSE" }) {
+        return (
+          <div className="ab v3">
+            <div className="v3-scan"></div>
+            <div className="v3-top">
+              <span>
+                <span className="dot"></span>LIVE · Obrador Madrid
+              </span>
+              <span>CH.48 / 03:14</span>
+            </div>
+            <h2 className="v3-h">
+              HEMOS
+              <br />
+              SOLTADO
+              <br />
+              <em>A UNO.</em>
+            </h2>
+            <div className="v3-log">
+              <div>
+                <span className="t">02:11</span> · lote enviado
+              </div>
+              <div>
+                <span className="t">02:47</span> ·{" "}
+                <span className="k">{name}</span> infiltrado en caja X
+              </div>
+              <div>
+                <span className="t">03:00</span> · esperando avistamiento...
+              </div>
+            </div>
+            <div className="v3-grid">
+              <div className="v3-cell">
+                <span className="lbl">Sabores</span>
+                <span className="val">3 fijos</span>
+              </div>
+              <div className="v3-cell">
+                <span className="lbl">Invitado</span>
+                <span className="val">1 raro</span>
+              </div>
+              <div className="v3-cell hit">?</div>
+            </div>
+            <div className="v3-cta">ABRIR PISTAS →</div>
+          </div>
+        );
+      }
 
-      <DCSection id="fantasma" title="Sección «Hay uno esperando por ti»" subtitle="4 maneras distintas de contar el invitado sorpresa">
-        <DCArtboard id="v1" label="V1 · Tarjeta oscura + sello" width={420} height={560}><V1 name="PAQUITO RAREZA" /></DCArtboard>
-        <DCArtboard id="v2" label="V2 · Ticket / recibo" width={360} height={560}><V2 name="PAQUITO RELIQUIA" /></DCArtboard>
-        <DCArtboard id="v3" label="V3 · Radar / transmisión" width={420} height={560}><V3 name="PAQUITO ECLIPSE" /></DCArtboard>
-        <DCArtboard id="v4" label="V4 · Sobre lacrado" width={420} height={560}><V4 name="PAQUITO ENIGMA" /></DCArtboard>
-      </DCSection>
+      // V4 — sobre lacrado
+      function V4({ name = "PAQUITO ENIGMA" }) {
+        return (
+          <div className="ab v4">
+            <div className="v4-eyebrow">·· Correspondencia privada ··</div>
+            <div className="v4-env">
+              <div className="v4-sello">PM</div>
+            </div>
+            <h2 className="v4-h">
+              NO LO ABRAS
+              <br />
+              <em>si no es para ti.</em>
+            </h2>
+            <p className="v4-p">
+              Un invitado fuera de carta, escondido en una caja al azar. Lo
+              llamamos <b>{name}</b>. Si te toca, <b>48 horas</b> para
+              fotografiarlo.
+            </p>
+            <div className="v4-cta">ROMPER EL SELLO →</div>
+          </div>
+        );
+      }
 
-      <DCSection id="galeria" title="Sección «Lo dicen ellos» / Galería" subtitle="4 layouts de prueba social">
-        <DCArtboard id="g1" label="G1 · Polaroids sueltas" width={420} height={560}><G1 /></DCArtboard>
-        <DCArtboard id="g2" label="G2 · Feed Instagram" width={360} height={560}><G2 /></DCArtboard>
-        <DCArtboard id="g3" label="G3 · Revista editorial" width={420} height={560}><G3 /></DCArtboard>
-        <DCArtboard id="g4" label="G4 · Muro de pegatinas" width={420} height={560}><G4 /></DCArtboard>
-      </DCSection>
-    </DesignCanvas>
-  );
-}
+      // G1 — collage polaroids
+      function G1() {
+        return (
+          <div className="ab g1">
+            <h2 className="g1-h">
+              LO DICEN
+              <br />
+              <em>ellos.</em>
+            </h2>
+            <p className="g1-sub">Fotos reales. Caja gratis cada mes.</p>
+            <div className="g1-stage">
+              <div className="g1-pol p1">
+                <div className="img">FOTO 01</div>
+                <div className="cap">@cliente_feliz</div>
+              </div>
+              <div className="g1-pol p2">
+                <div className="img">FOTO 02</div>
+                <div className="cap">@red.velvet</div>
+                <span className="g1-star">★ GANADOR</span>
+              </div>
+              <div className="g1-pol p3">
+                <div className="img">FOTO 03</div>
+                <div className="cap">@pistacho_4life</div>
+              </div>
+              <div className="g1-pol p4">
+                <div className="img">FOTO 04</div>
+                <div className="cap">@dulceadicto</div>
+              </div>
+            </div>
+          </div>
+        );
+      }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+      // G2 — mockup phone
+      function G2() {
+        return (
+          <div className="ab g2">
+            <div className="g2-phone">
+              <div className="g2-screen">
+                <div className="g2-bar">
+                  @paco_merlos <span>· 12.4k</span>
+                </div>
+                <div className="g2-grid">
+                  <div className="g2-tile img win" style={{ "--c": "#FF653A" }}>
+                    01
+                  </div>
+                  <div className="g2-tile img" style={{ "--c": "#8C52FF" }}>
+                    02
+                  </div>
+                  <div
+                    className="g2-tile img"
+                    style={{ "--c": "#FFD200", color: "#0f0f0f" }}
+                  >
+                    03
+                  </div>
+                  <div className="g2-tile img" style={{ "--c": "#0f0f0f" }}>
+                    04
+                  </div>
+                  <div className="g2-tile img win" style={{ "--c": "#8C52FF" }}>
+                    05
+                  </div>
+                  <div className="g2-tile img" style={{ "--c": "#FF653A" }}>
+                    06
+                  </div>
+                  <div
+                    className="g2-tile img"
+                    style={{ "--c": "#FFD200", color: "#0f0f0f" }}
+                  >
+                    07
+                  </div>
+                  <div className="g2-tile img" style={{ "--c": "#8C52FF" }}>
+                    08
+                  </div>
+                  <div className="g2-tile img win" style={{ "--c": "#FF653A" }}>
+                    09
+                  </div>
+                </div>
+                <div className="g2-foot">★ Sube tu foto → caja gratis</div>
+              </div>
+            </div>
+          </div>
+        );
+      }
 
-</body>
+      // G3 — editorial
+      function G3() {
+        return (
+          <div className="ab g3">
+            <div className="g3-top">
+              <div className="num">05</div>
+              <div className="meta">
+                · Comunidad
+                <br />
+                Vol. 01 / 2026
+              </div>
+            </div>
+            <h2 className="g3-h">
+              LO DICEN <em>ELLOS.</em>
+            </h2>
+            <div className="g3-layout">
+              <div className="g3-hero">
+                <div className="badge">★ GANADOR</div>
+                <span>
+                  @cliente_feliz
+                  <br />
+                  Caja gratis
+                </span>
+              </div>
+              <div className="g3-col">
+                <div className="g3-tile">@red.velvet</div>
+                <div className="g3-tile alt">@pistacho_4life</div>
+                <div className="g3-tile">@dulceadicto</div>
+              </div>
+            </div>
+            <div className="g3-foot">
+              <span>— Etiqueta @paco_merlos</span>
+              <span>
+                <b>→</b> Cada mes
+              </span>
+            </div>
+          </div>
+        );
+      }
+
+      // G4 — muro de pegatinas
+      function G4() {
+        return (
+          <div className="ab g4">
+            <h2 className="g4-h">
+              MURO DE
+              <br />
+              <em>fans.</em>
+            </h2>
+            <div className="g4-wall">
+              <div className="g4-sticker g4-s1">
+                <span className="tape"></span>
+                <div className="pic">★</div>
+                <div className="cap">@cliente_feliz</div>
+              </div>
+              <div className="g4-sticker g4-s2">
+                <span className="tape"></span>
+                <div className="pic">02</div>
+                <div className="cap">@red.velvet</div>
+              </div>
+              <div className="g4-sticker g4-s3">
+                <span className="tape"></span>
+                <div className="pic">03</div>
+                <div className="cap">@pistacho_4life</div>
+              </div>
+              <div className="g4-sticker g4-s4">
+                <span className="tape"></span>
+                <div className="pic">★</div>
+                <div className="cap">@dulceadicto</div>
+              </div>
+            </div>
+            <div className="g4-cta">ETIQUETA @PACO_MERLOS</div>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <DesignCanvas>
+            <DCSection
+              id="nombres"
+              title="Ideas de nombre"
+              subtitle="Para reemplazar 'Paquito Fantasma' — el invitado sorpresa"
+            >
+              <DCArtboard
+                id="names"
+                label="Ranking · 16 candidatos"
+                width={360}
+                height={640}
+              >
+                <Names />
+              </DCArtboard>
+            </DCSection>
+
+            <DCSection
+              id="fantasma"
+              title="Sección «Hay uno esperando por ti»"
+              subtitle="4 maneras distintas de contar el invitado sorpresa"
+            >
+              <DCArtboard
+                id="v1"
+                label="V1 · Tarjeta oscura + sello"
+                width={420}
+                height={560}
+              >
+                <V1 name="PAQUITO RAREZA" />
+              </DCArtboard>
+              <DCArtboard
+                id="v2"
+                label="V2 · Ticket / recibo"
+                width={360}
+                height={560}
+              >
+                <V2 name="PAQUITO RELIQUIA" />
+              </DCArtboard>
+              <DCArtboard
+                id="v3"
+                label="V3 · Radar / transmisión"
+                width={420}
+                height={560}
+              >
+                <V3 name="PAQUITO ECLIPSE" />
+              </DCArtboard>
+              <DCArtboard
+                id="v4"
+                label="V4 · Sobre lacrado"
+                width={420}
+                height={560}
+              >
+                <V4 name="PAQUITO ENIGMA" />
+              </DCArtboard>
+            </DCSection>
+
+            <DCSection
+              id="galeria"
+              title="Sección «Lo dicen ellos» / Galería"
+              subtitle="4 layouts de prueba social"
+            >
+              <DCArtboard
+                id="g1"
+                label="G1 · Polaroids sueltas"
+                width={420}
+                height={560}
+              >
+                <G1 />
+              </DCArtboard>
+              <DCArtboard
+                id="g2"
+                label="G2 · Feed Instagram"
+                width={360}
+                height={560}
+              >
+                <G2 />
+              </DCArtboard>
+              <DCArtboard
+                id="g3"
+                label="G3 · Revista editorial"
+                width={420}
+                height={560}
+              >
+                <G3 />
+              </DCArtboard>
+              <DCArtboard
+                id="g4"
+                label="G4 · Muro de pegatinas"
+                width={420}
+                height={560}
+              >
+                <G4 />
+              </DCArtboard>
+            </DCSection>
+          </DesignCanvas>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
 </html>

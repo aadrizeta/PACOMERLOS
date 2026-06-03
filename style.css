@@ -338,7 +338,6 @@ button { font-family: inherit; cursor: pointer; }
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    padding-right: 1rem;
 }
 
 .hero-bg-word {
@@ -876,7 +875,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .statement-title {
     font-family: 'Chunko', sans-serif;
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(2.5rem, 8vw, 8rem);
     text-transform: uppercase;
     line-height: 0.88;
     letter-spacing: 0.01em;
